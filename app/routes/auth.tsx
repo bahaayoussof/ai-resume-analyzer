@@ -7,7 +7,7 @@ export const meta = () => [
   { name: "description", content: "Log into your account to continue" },
 ];
 
-const auth = () => {
+const Auth = () => {
   const { isLoading, auth } = usePuterStore();
 
   const navigate = useNavigate();
@@ -54,4 +54,4 @@ const auth = () => {
   );
 };
 
-export default auth;
+export default Auth;
