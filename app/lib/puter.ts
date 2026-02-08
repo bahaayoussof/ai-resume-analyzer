@@ -168,7 +168,7 @@ export const usePuterStore = create<PuterStore>((set, get) => {
   const signIn = async (): Promise<void> => {
     const puter = getPuter();
     if (!puter) {
-      setError("Puter.js not available");
+      setError("Puter.js not available. Please refresh the page.");
       return;
     }
 
@@ -350,8 +350,7 @@ export const usePuterStore = create<PuterStore>((set, get) => {
           ],
         },
       ],
-      // { model: "claude-sonnet-4" }
-      { model: "claude-3-7-sonnet" }
+      { model: "claude-sonnet-4" }
     ) as Promise<AIResponse | undefined>;
   };
 

@@ -1,4 +1,3 @@
-import { prepareInstructions } from "constants";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import FileUploader from "~/components/FileUploader";
@@ -6,6 +5,7 @@ import Navbar from "~/components/Navbar";
 import { convertPdfToImage } from "~/lib/pdf2img";
 import { usePuterStore } from "~/lib/puter";
 import { generateUUID } from "~/lib/utils";
+import { prepareInstructions } from "../../constants";
 
 const Upload = () => {
   const { auth, isLoading, fs, ai, kv } = usePuterStore();
@@ -90,8 +90,7 @@ const Upload = () => {
 
     setStatusText("Analysis complete, redirecting...");
 
-    console.log(data);
-    // navigate(`/resume/${uuid}`);
+    navigate(`/resume/${uuid}`);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
