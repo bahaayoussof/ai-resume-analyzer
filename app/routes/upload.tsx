@@ -5,7 +5,8 @@ import Navbar from "~/components/Navbar";
 import { convertPdfToImage } from "~/lib/pdf2img";
 import { usePuterStore } from "~/lib/puter";
 import { generateUUID } from "~/lib/utils";
-import { prepareInstructions } from "../../constants";
+import { AIResponseFormat, prepareInstructions } from "../../constants";
+import { feedbackMapper } from "~/lib/feedback-mapper";
 
 const Upload = () => {
   const { auth, isLoading, fs, ai, kv } = usePuterStore();
@@ -62,7 +63,7 @@ const Upload = () => {
       companyName,
       jobTitle,
       jobDescription,
-      feedback: "",
+      feedback: {},
     };
 
     await kv.set(`resume:${uuid}`, JSON.stringify(data));
@@ -74,6 +75,7 @@ const Upload = () => {
       prepareInstructions({
         jobTitle,
         jobDescription,
+        AIResponseFormat,
       }),
     );
 
@@ -84,7 +86,7 @@ const Upload = () => {
         ? feedback.message.content
         : feedback.message.content[0].text;
 
-    data.feedback = JSON.parse(feedbackText);
+    data.feedback = feedbackMapper(JSON.parse(feedbackText));
 
     await kv.set(`resume:${uuid}`, JSON.stringify(data));
 
